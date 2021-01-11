@@ -19550,7 +19550,21 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   const React = __toModule(require_react());
   const ReactDOM = __toModule(require_react_dom());
   const App = () => {
-    console.log(store_default);
+    console.log(store_default.getState());
+    store_default.dispatch({
+      type: "bugAdded",
+      payload: {
+        description: "bug1"
+      }
+    });
+    console.log(store_default.getState());
+    store_default.dispatch({
+      type: "bugRemoved",
+      payload: {
+        id: 1
+      }
+    });
+    console.log(store_default.getState());
     return React.createElement("div", null, "this is a basic redux application");
   };
   ReactDOM.render(React.createElement("div", {
