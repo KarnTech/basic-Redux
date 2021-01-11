@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom'
 import store from './store'
 
 import * as actions from './actiontypes'
-
+import {bugAdded } from './actions'
 const App = () => {
   
   console.log(store.getState())
@@ -11,12 +11,7 @@ const App = () => {
     console.log("storechanged", store.getState())
   })
 
-  store.dispatch({
-    type: actions.bug_added,
-    payload: {
-      description: "bug1"
-    }
-  })
+  store.dispatch(bugAdded("Bug 1"))
 
       console.log(store.getState())
 

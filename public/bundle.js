@@ -19550,6 +19550,16 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   const store2 = createStore(reducer);
   const store_default = store2;
 
+  // src/actions.js
+  function bugAdded(description) {
+    return {
+      type: bug_added,
+      payload: {
+        description
+      }
+    };
+  }
+
   // src/App.js
   const React = __toModule(require_react());
   const ReactDOM = __toModule(require_react_dom());
@@ -19558,12 +19568,7 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     store_default.subscribe(() => {
       console.log("storechanged", store_default.getState());
     });
-    store_default.dispatch({
-      type: bug_added,
-      payload: {
-        description: "bug1"
-      }
-    });
+    store_default.dispatch(bugAdded("Bug 1"));
     console.log(store_default.getState());
     store_default.dispatch({
       type: bug_removed,
