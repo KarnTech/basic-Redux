@@ -19527,16 +19527,20 @@ For more info, visit https://fb.me/react-mock-scheduler`);
     warning('You are currently using minified code outside of NODE_ENV === "production". This means that you are running a slower development build of Redux. You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify or setting mode to production in webpack (https://webpack.js.org/concepts/mode/) to ensure you have the correct code for your production build.');
   }
 
+  // src/actiontypes.js
+  const bug_added = "bugAdded";
+  const bug_removed = "bugRemoved";
+
   // src/reducer.js
   let lastId = 0;
   function reducer(state = [], action) {
-    if (action.type === "bugAdded") {
+    if (action.type === bug_added) {
       return [...state, {
         description: action.payload.description,
         resolved: false,
         id: ++lastId
       }];
-    } else if (action.type === "bugRemoved") {
+    } else if (action.type === bug_removed) {
       return state.filter((bug) => bug.id !== action.payload.id);
     }
     return state;
@@ -19551,15 +19555,18 @@ For more info, visit https://fb.me/react-mock-scheduler`);
   const ReactDOM = __toModule(require_react_dom());
   const App = () => {
     console.log(store_default.getState());
+    store_default.subscribe(() => {
+      console.log("storechanged", store_default.getState());
+    });
     store_default.dispatch({
-      type: "bugAdded",
+      type: bug_added,
       payload: {
         description: "bug1"
       }
     });
     console.log(store_default.getState());
     store_default.dispatch({
-      type: "bugRemoved",
+      type: bug_removed,
       payload: {
         id: 1
       }
